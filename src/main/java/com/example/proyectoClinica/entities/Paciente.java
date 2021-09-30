@@ -1,6 +1,7 @@
 package com.example.proyectoClinica.entities;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -8,15 +9,15 @@ import java.util.Date;
 public class Paciente {
 
     @Id
-    @SequenceGenerator(name = "domicilio_sequence", sequenceName = "domicilio_sequence")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_generator")
+    @SequenceGenerator(name = "paciente_sequence", sequenceName = "paciente_sequence")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "paciente_sequence")
     private Long id;
 
     private String nombre;
     private String apellido;
     private String dni;
 
-    private String fechaIngreso;
+    private LocalDate fechaIngreso;
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "domicilio_id")
    private Domicilio domicilio;
@@ -24,13 +25,14 @@ public class Paciente {
 
     public Paciente() {
     }
-    public Paciente(String nombre, String apellido, String dni, String fechaIngreso, Domicilio domicilio) {
+    public Paciente(String nombre, String apellido, String dni, LocalDate fechaIngreso, Domicilio domicilio) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.fechaIngreso = fechaIngreso;
        this.domicilio = domicilio;
     }
+
 
     public Long getId() {
         return id;
@@ -60,11 +62,11 @@ public class Paciente {
         this.dni = dni;
     }
 
-    public String getFechaIngreso() {
+    public LocalDate getFechaIngreso() {
         return fechaIngreso;
     }
 
-    public void setFechaIngreso(String fechaIngreso) {
+    public void setFechaIngreso(LocalDate fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
 

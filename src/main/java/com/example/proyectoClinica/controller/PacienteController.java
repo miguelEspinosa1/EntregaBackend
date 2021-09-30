@@ -30,16 +30,15 @@ public class PacienteController {
 
     @PostMapping
     public ResponseEntity<String> postPaciente(@RequestBody Paciente paciente){
-
-        ResponseEntity<String> response = ResponseEntity.ok("El paciente "+pacienteService.postPaciente(paciente).getNombre()+" fue creado");
-        if (response != null){
-            return response;
+    Paciente pacientel= pacienteService.postPaciente(paciente);
+         if (pacientel != null){
+            return ResponseEntity.ok("El paciente "+pacientel.getNombre()+" fue creado");
         }else{
-            return null;
+            return ResponseEntity.badRequest().body("No se pudo crear el paciente");
         }
     }
     @PutMapping
-    public ResponseEntity<Paciente> putOdontologo(@RequestParam Paciente paciente){
+    public ResponseEntity<Paciente> putPaciente(@RequestParam Paciente paciente){
         ResponseEntity<Paciente> response = ResponseEntity.ok(pacienteService.updatePaciente(paciente));
         return response;
     }

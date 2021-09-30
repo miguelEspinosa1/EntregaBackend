@@ -7,6 +7,7 @@ import com.example.proyectoClinica.services.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 @Service
 public class PacienteServiceImpl implements PacienteService {
@@ -22,7 +23,7 @@ public class PacienteServiceImpl implements PacienteService {
 
     @Override
     public List<Paciente> getAll() {
-        
+    
         return pacienteRepository.findAll();
     }
 
@@ -33,17 +34,18 @@ public class PacienteServiceImpl implements PacienteService {
 
     @Override
     public Paciente postPaciente(Paciente paciente) {
-
+        paciente.setFechaIngreso(LocalDate.now());
        domicilioService.postDomicilio(paciente.getDomicilio());
         return pacienteRepository.save(paciente);
     }
 
     @Override
     public Paciente updatePaciente(Paciente paciente) {
-
-        if( pacienteRepository.getById(paciente.getId())!= null) {
+        if( pacienteRepository.getById(paciente.getId())!=null) {
        //     domicilioService.updateDomicilio(paciente.getDomicilio());
-        return    pacienteRepository.save(paciente);
+
+
+            return    pacienteRepository.save(paciente);
         }else {
 
 

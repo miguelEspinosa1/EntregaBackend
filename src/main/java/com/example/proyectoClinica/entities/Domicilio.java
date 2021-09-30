@@ -7,21 +7,24 @@ public class Domicilio {
 
     @Id
     @SequenceGenerator(name = "domicilio_sequence", sequenceName = "domicilio_sequence")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_generator")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "domicilio_sequence")
     private Long id;
 
     private String calle;
     private String numero;
     private String localidad;
     private String provincia;
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Paciente paciente;
+
 
     public Domicilio(String calle, String numero, String localidad, String provincia) {
         this.calle = calle;
         this.numero = numero;
         this.localidad = localidad;
         this.provincia = provincia;
+    }
+
+    public Domicilio() {
+
     }
 
     public Long getId() {
@@ -60,11 +63,4 @@ public class Domicilio {
         this.provincia = provincia;
     }
 
-    public Paciente getPaciente() {
-        return paciente;
-    }
-
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
-    }
 }

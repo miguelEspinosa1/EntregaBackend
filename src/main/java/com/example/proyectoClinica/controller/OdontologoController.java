@@ -31,14 +31,14 @@ public class OdontologoController {
     @PostMapping
     public ResponseEntity<String> postOdontologo(@RequestBody Odontologo odontologo){
 
-        ResponseEntity<String> response = ResponseEntity.ok("El paciente "+odontologoService.postOdontologo(odontologo).getNombre()+" fue creado");
+        ResponseEntity<String> response = ResponseEntity.ok("El odontologo "+odontologoService.postOdontologo(odontologo).getNombre()+" fue creado");
         if (response != null){
             return response;
         }else{
             return response;
         }
          }
-    @PutMapping
+    @PatchMapping
     public ResponseEntity<Odontologo> putOdontologo(@RequestParam Odontologo odontologo){
         ResponseEntity<Odontologo> response = ResponseEntity.ok(odontologoService.updateOdontologo(odontologo));
         return response;
