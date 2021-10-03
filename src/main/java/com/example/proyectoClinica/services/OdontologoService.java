@@ -1,18 +1,20 @@
 package com.example.proyectoClinica.services;
 
+import com.example.proyectoClinica.Model.OdontologoDTO;
 import com.example.proyectoClinica.entities.Odontologo;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 @Service
 public interface OdontologoService {
-    List<Odontologo> getAll();
+    Collection<OdontologoDTO> getAll();
 
-    Odontologo getById(Long id);
+    OdontologoDTO getById(Long id);
 
-    Odontologo postOdontologo(Odontologo odontologo);
+    OdontologoDTO postOdontologo(OdontologoDTO odontologo);
 
-    Odontologo updateOdontologo( Odontologo odontologo);
+    OdontologoDTO updateOdontologo( OdontologoDTO odontologo);
 
    void  delete (Long id);
 }

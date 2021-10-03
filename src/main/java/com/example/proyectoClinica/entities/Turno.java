@@ -3,12 +3,17 @@ package com.example.proyectoClinica.entities;
 
 
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
 @Table(name="turnos")
+@Getter
+@Setter
 public class Turno {
     @Id
     @GeneratedValue(generator = "secuenciaDeTurno" , strategy = GenerationType.SEQUENCE)
@@ -16,11 +21,11 @@ public class Turno {
     private Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "odontologo_id")
+    @JoinColumn(name = "odontologo_id",nullable = false)
     private Odontologo odontologo;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "paciente_id")
+    @JoinColumn(name = "paciente_id",nullable = false)
     private Paciente paciente;
 
     private LocalDate fechaTurno;
@@ -39,39 +44,5 @@ public class Turno {
     public Turno() {
     }
 
-    public Long getId() {
-        return id;
-    }
 
-    public Odontologo getOdontologo() {
-        return odontologo;
-    }
-
-    public void setOdontologo(Odontologo odontologo) {
-        this.odontologo = odontologo;
-    }
-
-    public Paciente getPaciente() {
-        return paciente;
-    }
-
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
-    }
-
-    public LocalDate getFechaTurno() {
-        return fechaTurno;
-    }
-
-    public void setFechaTurno(LocalDate fechaTurno) {
-        this.fechaTurno = fechaTurno;
-    }
-
-    public LocalTime getHoraTurno() {
-        return horaTurno;
-    }
-
-    public void setHoraTurno(LocalTime horaTurno) {
-        this.horaTurno = horaTurno;
-    }
 }

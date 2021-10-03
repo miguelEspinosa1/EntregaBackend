@@ -1,5 +1,6 @@
 package com.example.proyectoClinica.controller;
 
+import com.example.proyectoClinica.Model.OdontologoDTO;
 import com.example.proyectoClinica.entities.Odontologo;
 import com.example.proyectoClinica.services.OdontologoService;
 import com.example.proyectoClinica.services.impl.OdontologoServiceImpl;
@@ -17,30 +18,26 @@ public class OdontologoController {
     OdontologoService odontologoService;
 
     @GetMapping
-    public ResponseEntity<List<Odontologo>> getAll(){
+    public ResponseEntity<?> getAll(){
 
         return ResponseEntity.ok(odontologoService.getAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Odontologo> getById(@PathVariable Long id){
-            ResponseEntity<Odontologo> response = ResponseEntity.ok(odontologoService.getById(id));
+    public ResponseEntity<?> getById(@PathVariable Long id){
+            ResponseEntity<OdontologoDTO> response = ResponseEntity.ok(odontologoService.getById(id));
             return response;
     }
 
     @PostMapping
-    public ResponseEntity<String> postOdontologo(@RequestBody Odontologo odontologo){
+    public ResponseEntity<String> postOdontologo(@RequestBody OdontologoDTO odontologo){
 
         ResponseEntity<String> response = ResponseEntity.ok("El odontologo "+odontologoService.postOdontologo(odontologo).getNombre()+" fue creado");
-        if (response != null){
             return response;
-        }else{
-            return response;
-        }
          }
-    @PatchMapping
-    public ResponseEntity<Odontologo> putOdontologo(@RequestParam Odontologo odontologo){
-        ResponseEntity<Odontologo> response = ResponseEntity.ok(odontologoService.updateOdontologo(odontologo));
+    @PutMapping
+    public ResponseEntity<?> putOdontologo(@RequestParam OdontologoDTO odontologo){
+        ResponseEntity<OdontologoDTO> response = ResponseEntity.ok(odontologoService.updateOdontologo(odontologo));
         return response;
     }
     @DeleteMapping("/{id}")

@@ -1,21 +1,23 @@
 package com.example.proyectoClinica.services;
 
 
+import com.example.proyectoClinica.Model.PacienteDTO;
 import com.example.proyectoClinica.entities.Odontologo;
 import com.example.proyectoClinica.entities.Paciente;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
 public interface PacienteService {
-    List <Paciente> getAll();
+    Collection<PacienteDTO> getAll();
 
-    Paciente getById(Long id);
+    PacienteDTO getById(Long id);
 
-    Paciente postPaciente(Paciente paciente);
+    PacienteDTO postPaciente(PacienteDTO paciente);
 
-    Paciente updatePaciente(Paciente paciente);
+    PacienteDTO updatePaciente(PacienteDTO paciente);
 
     void delete(Long id);
 }

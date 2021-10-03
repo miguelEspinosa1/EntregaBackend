@@ -1,5 +1,6 @@
 package com.example.proyectoClinica.controller;
 
+import com.example.proyectoClinica.Model.PacienteDTO;
 import com.example.proyectoClinica.entities.Odontologo;
 import com.example.proyectoClinica.entities.Paciente;
 import com.example.proyectoClinica.services.OdontologoService;
@@ -17,20 +18,20 @@ public class PacienteController {
     PacienteService pacienteService;
 
     @GetMapping
-    public ResponseEntity<List<Paciente>> getAll(){
+    public ResponseEntity<?> getAll(){
 
         return ResponseEntity.ok(pacienteService.getAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Paciente> getById(@PathVariable Long id){
-        ResponseEntity<Paciente> response = ResponseEntity.ok(pacienteService.getById(id));
+    public ResponseEntity<?> getById(@PathVariable Long id){
+        ResponseEntity<PacienteDTO> response = ResponseEntity.ok(pacienteService.getById(id));
         return response;
     }
 
     @PostMapping
-    public ResponseEntity<String> postPaciente(@RequestBody Paciente paciente){
-    Paciente pacientel= pacienteService.postPaciente(paciente);
+    public ResponseEntity<String> postPaciente(@RequestBody PacienteDTO paciente){
+    PacienteDTO pacientel= pacienteService.postPaciente(paciente);
          if (pacientel != null){
             return ResponseEntity.ok("El paciente "+pacientel.getNombre()+" fue creado");
         }else{
@@ -38,8 +39,8 @@ public class PacienteController {
         }
     }
     @PutMapping
-    public ResponseEntity<Paciente> putPaciente(@RequestParam Paciente paciente){
-        ResponseEntity<Paciente> response = ResponseEntity.ok(pacienteService.updatePaciente(paciente));
+    public ResponseEntity<?> putPaciente(@RequestParam PacienteDTO paciente){
+        ResponseEntity<PacienteDTO> response = ResponseEntity.ok(pacienteService.updatePaciente(paciente));
         return response;
     }
     @DeleteMapping("/{id}")

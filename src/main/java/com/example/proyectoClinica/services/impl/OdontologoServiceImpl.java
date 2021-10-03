@@ -1,35 +1,50 @@
 package com.example.proyectoClinica.services.impl;
 
+import com.example.proyectoClinica.Model.OdontologoDTO;
 import com.example.proyectoClinica.entities.Odontologo;
 import com.example.proyectoClinica.repository.OdontologoRepository;
 import com.example.proyectoClinica.services.OdontologoService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+
+import java.util.*;
 
 @Service
 public class OdontologoServiceImpl implements OdontologoService {
 
-   @Autowired
+    @Autowired
     OdontologoRepository odontologoRepository;
+    @Autowired
+    ObjectMapper objectMapper;
 
     public OdontologoServiceImpl(OdontologoRepository odontologoRepository) {
         this.odontologoRepository = odontologoRepository;
     }
 
     @Override
-    public List<Odontologo> getAll() {
-        return odontologoRepository.findAll();
+    public Collection<OdontologoDTO> getAll() {
+        List<Odontologo> odontologos= odontologoRepository.findAll();
+        Set<OdontologoDTO> odontologoDTOS= new HashSet<>();
+        for (Odontologo odontologo: odontologos){
+            odontologoDTOS.add(objectMapper.convertValue(odontologo,OdontologoDTO.class));
+        }
+        return odontologoDTOS;
     }
 
     @Override
-    public Odontologo postOdontologo(Odontologo odontologo){return (Odontologo) odontologoRepository.save(odontologo); }
+    public OdontologoDTO postOdontologo(OdontologoDTO odontologo){
+        Odontologo odontologo1= objectMapper.convertValue(odontologo,Odontologo.class);
+
+        return objectMapper.convertValue(odontologoRepository.save(odontologo1),OdontologoDTO.class);
+    }
 
     @Override
-    public Odontologo updateOdontologo(Odontologo odontologo) {
-            if(odontologoRepository.getById(odontologo.getId()) != null){
-                return odontologoRepository.save(odontologo);
+    public OdontologoDTO updateOdontologo(OdontologoDTO odontologo) {
+            if(odontologoRepository.findById(odontologo.getId()).isPresent()){
+               Odontologo odontologo1= odontologoRepository.save(objectMapper.convertValue(odontologo, Odontologo.class));
+                return odontologo;
             }
         return null;
     }
@@ -40,7 +55,12 @@ public class OdontologoServiceImpl implements OdontologoService {
     }
 
     @Override
-    public Odontologo getById(Long id ) {
-        return (Odontologo) odontologoRepository.getById(id);
+    public OdontologoDTO getById(Long id ) {
+        OdontologoDTO odontologoDTO=null;
+        Optional<Odontologo> odontologo= odontologoRepository.findById(id);
+        if (odontologo.isPresent()){
+            odontologoDTO= objectMapper.convertValue(odontologo,OdontologoDTO.class);
+        }
+        return odontologoDTO;
     }
 }

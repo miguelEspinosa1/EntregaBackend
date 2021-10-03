@@ -1,6 +1,6 @@
-package com.example.proyectoClinica.Login;
+package com.example.proyectoClinica.repository;
 
-import org.springframework.boot.json.JsonParser;
+import com.example.proyectoClinica.entities.User.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
