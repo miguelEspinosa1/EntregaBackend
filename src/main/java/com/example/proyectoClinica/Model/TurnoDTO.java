@@ -23,5 +23,13 @@ public class TurnoDTO {
 
     private LocalTime horaTurno;
 
+    public TurnoDTO(Odontologo odontologo, Paciente paciente, String fechaTurno, String horaTurno) {
+        this.odontologo = odontologo;
+        this.paciente = paciente;
+        LocalDate fecha= LocalDate.parse(fechaTurno);
+        this.fechaTurno = fecha;
 
+        LocalTime hora= LocalTime.parse(horaTurno);
+        this.horaTurno = hora;
+    }
 }

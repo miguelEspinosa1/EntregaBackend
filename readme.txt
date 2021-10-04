@@ -1,10 +1,17 @@
-En mi caso habia podido llegar satiscactoriamente a implementar las peticiones de la API con DAO,
-en el momento de usar repository tuve bastantes inconvenientes con la inyección de dependencias pero 
-se pudieron resolver cuando fue necesario, actualmente lo unico que no entiendo bien en termino conceptual
-y practico es el DTO , no entiendo bien su uso. Que creo yo que es la razón por la cual estoy obteniendo el 
-siguiennte error : en el moemento que ejecuto un pacienteService.getAll() en postMan arroja un array vacio
-(lo natural al momento de iniciar la API), en el momento en el que ejecuto un pacienteService.postPaciente()
-la API trabaja y responde como si el paciente se hubiese guardado correctameente, pero , cuando trato de usar
-el pacienteService.getAll() de nuevo o uso pacienteService.getById() me arroja un InternalServerError 500.
-No se si el problema es relacionado al no uso de DTO y tratar de retornar un paciente directamente o si tiene 
-que ver con el uso de domicilioService;  ya que odontologoController funciona correctamente en todos sus endPoints
+Recomendaciones al momento de usar la api:
+
+Implementé los conceptos básicos de cada uno de los temas, tuve uno que otro inconveniente que fui
+resolviendo muy poco ortodoxamente.
+Con respecto al uso de las fechas,no encontre la manera de pasar una fecha en formato JSON, lo que
+dicidí hacer fue requerir en el constructor de turno un String como fecha y  un string como hora ,
+el formato de fecha es YYYY-MM-DD, formato de hora HH:MM:SS.
+En pacientes al momento de crearlo se coloca automaticamente la fecha actual en formato YYYY-MM-DD, cuando
+se quiera actualizar se puede enviar como String en el JSON.
+Al momento de crear un turno se valida si el doctor esta ocupado a esa hora, esto significa que si se
+ordena un turno a las 06:30:00, el doctor estará ocupado de 06:00:00 a 06:59:59, es recomendable agendar los
+turnos a cada hora en punto, el paciente puede crear cuantos turnos sean necesarios a la misma hora.
+No pude insertar directamente un nuevo usuario ADMIN-padre en el programa de h2, asi que decidi hardcodearlo
+en el AppUserService usando ApplicationRunner, para validar el usuario, el programa exigirá email (que en este
+caso es "mateo@paez.com") y una password (que en este caso es "password").
+No aprendí a agregar la información de validación por medio de postman, asi que en los request que estan agregados
+en la info es necesario agregar dicha información de validacion.

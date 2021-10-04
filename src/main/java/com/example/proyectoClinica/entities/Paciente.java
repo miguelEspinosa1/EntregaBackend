@@ -3,6 +3,7 @@ package com.example.proyectoClinica.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -37,11 +38,12 @@ public class Paciente {
 
     public Paciente() {
     }
-    public Paciente(String nombre, String apellido, String dni, LocalDate fechaIngreso, Domicilio domicilio) {
+    public Paciente(String nombre, String apellido, String dni, String fechaIngreso, Domicilio domicilio) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
-        this.fechaIngreso = fechaIngreso;
+        LocalDate fecha= LocalDate.parse(fechaIngreso);
+        this.fechaIngreso = fecha;
        this.domicilio = domicilio;
     }
 
