@@ -23,7 +23,7 @@ class ProyectoClinicaApplicationTests {
     odontologo.setApellido("alfredo");
     odontologo.setNombre("armando");
     odontologo.setMatricula(23456);
-        Assertions.assertTrue(odontologoService.postOdontologo(odontologo)!=null);
+        Assertions.assertEquals(odontologoService.postOdontologo(odontologo),Odontologo.class);
 
     }
 }
